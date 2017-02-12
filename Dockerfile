@@ -1,6 +1,6 @@
 FROM logstash:2.1.1-1
 
-MAINTAINER Quirino Brizi, <quirino.brizi@accenture.com>
+MAINTAINER Francisco Rodriguez, <francisco.rodriguez@aditazz.com>
 
 ADD ./resources/config/logstash.yml /etc/logstash/conf.d/logstash.yml
 
