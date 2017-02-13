@@ -26,7 +26,7 @@ input {
   stdin {}
   file {
     type => syslog
-    path => "/var/log/logstash"
+    path => "/var/log/logstash/*"
     start_position => beginning
   }
 }
@@ -68,6 +68,9 @@ filter {
 }
 
 output {
+  stdout {
+    codec => rubydebug
+  }
   elasticsearch {
     hosts => "elasticsearch:9200"
   }
