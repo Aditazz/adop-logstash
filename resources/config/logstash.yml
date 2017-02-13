@@ -23,6 +23,12 @@ input {
     #   what => "previous"
     # }
   }
+  stdin {}
+  file {
+    type => syslog
+    path => "/var/log/logstash"
+    start_position => beginning
+  }
 }
 
 filter {
