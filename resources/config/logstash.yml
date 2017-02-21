@@ -32,6 +32,11 @@ input {
 }
 
 filter {
+
+  grok {
+    match => { "message" => "%{TIME:time} \[%{USER:user}\] \[%{DATA:operation}\] \[%{DATA:threadname}\] %{LOGLEVEL:loglevel}\s+%{JAVACLASS:logger} \-? %{GREEDYDATA:logmessage}" }
+  }
+  
   if "docker/" in [program] {
     mutate {
       add_field => {
@@ -71,7 +76,10 @@ output {
   stdout {
     codec => rubydebug
   }
+  
   elasticsearch {
-    hosts => "elasticsearch:9200"
+    hosts => [ "elasticsearch:9200" ]
+    index => "elk-data-%{+YYYY.MM.dd}"
+    document_type => "log"
   }
 }
